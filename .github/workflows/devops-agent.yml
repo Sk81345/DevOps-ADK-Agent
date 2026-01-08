@@ -21,3 +21,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: echo "Deploying app..."
+  
+  Notficaiton: 
+    needs: deploy
+    runs-on: ubuntu-latest
+    steps:
+       - name: Notify Slack
+             curl -X POST -H 'Content-type: application/json' \
+            --data '{"text":"Pipeline completed"}' \
+            ${{ secrets.SLACK_WEBHOOK }}
+
