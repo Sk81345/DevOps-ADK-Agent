@@ -1,0 +1,23 @@
+on:
+  workflow_dispatch:
+  pull_request:
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: AI PR Review
+        run: echo "AI reviewing PR..."
+
+  build:
+    needs: ai-review
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Building app..."
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Deploying app..."
